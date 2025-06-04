@@ -1,22 +1,22 @@
 package com.gestaoespaco.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 public class Solicitacao {
 	private Long id;
 	private Espaco espaco;
 	private Solicitante solicitante;
-	private LocalDateTime dataSolicitacao;
-	private LocalDateTime inicio;
-	private LocalDateTime fim;
+	private Timestamp dataSolicitacao;
+	private Timestamp inicio;
+	private Timestamp fim;
 	private String motivo;
 	private boolean status;
 
 	public Solicitacao() {
 	}
 
-	public Solicitacao(Long id, Espaco espaco, Solicitante solicitante, LocalDateTime dataSolicitacao,
-			LocalDateTime inicio, LocalDateTime fim, String motivo, boolean status) {
+	public Solicitacao(Long id, Espaco espaco, Solicitante solicitante, Timestamp dataSolicitacao,
+			Timestamp inicio, Timestamp fim, String motivo, boolean status) {
 		this.id = id;
 		this.espaco = espaco;
 		this.solicitante = solicitante;
@@ -51,27 +51,27 @@ public class Solicitacao {
 		this.solicitante = solicitante;
 	}
 
-	public LocalDateTime getDataSolicitacao() {
+	public Timestamp getDataSolicitacao() {
 		return dataSolicitacao;
 	}
 
-	public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
+	public void setDataSolicitacao(Timestamp dataSolicitacao) {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
-	public LocalDateTime getInicio() {
+	public Timestamp getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDateTime inicio) {
+	public void setInicio(Timestamp inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDateTime getFim() {
+	public Timestamp getFim() {
 		return fim;
 	}
 
-	public void setFim(LocalDateTime fim) {
+	public void setFim(Timestamp fim) {
 		this.fim = fim;
 	}
 

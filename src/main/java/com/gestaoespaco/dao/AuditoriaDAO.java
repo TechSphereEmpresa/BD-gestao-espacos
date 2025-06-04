@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gestaoespaco.model.Auditoria;
-import com.gestaoespaco.model.Solicitacao;
 
 public class AuditoriaDAO {
 	private Connection conexao = null;
@@ -21,7 +20,7 @@ public class AuditoriaDAO {
 		try {
 			conexao = BancoConexaoDAO.getConexao();
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setLong(1, auditoria.getSolicitacao().getId());
+			stmt.setLong(1, auditoria.getId_solicitacao());
 			stmt.setTimestamp(2, auditoria.getDataAcao());
 			stmt.setString(3, auditoria.getTipoAcao());
 			stmt.setString(4, auditoria.getTabelaAfetada());
@@ -47,9 +46,7 @@ public class AuditoriaDAO {
 			while (rs.next()) {
 				Auditoria auditoria = new Auditoria();
 				auditoria.setId(rs.getLong("id"));
-				Solicitacao solicitacao = new Solicitacao();
-				solicitacao.setId(rs.getLong("id_solicitacao"));
-				auditoria.setSolicitacao(solicitacao);
+				auditoria.setId_solicitacao(rs.getInt("id_solicitacao"));
 				auditoria.setDataAcao(rs.getTimestamp("data_acao"));
 				auditoria.setTipoAcao(rs.getString("tipo_acao"));
 				auditoria.setTabelaAfetada(rs.getString("tabela_afetada"));

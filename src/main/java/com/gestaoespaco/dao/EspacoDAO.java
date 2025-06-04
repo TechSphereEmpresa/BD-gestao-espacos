@@ -56,6 +56,7 @@ public class EspacoDAO {
 
 			while (rs.next()) {
 				Espaco esp = new Espaco();
+			    esp.setId(rs.getLong("id"));
 				esp.setNome(rs.getString("nome"));
 				esp.setTipo(rs.getString("tipo"));
 				esp.setLocalizacao(rs.getString("localizacao"));

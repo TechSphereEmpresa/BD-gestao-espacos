@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Auditoria {
 	private Long id;
-	private Solicitacao solicitacao;
+	private Integer id_solicitacao;
 	private Timestamp dataAcao;
 	private String tipoAcao;
 	private String tabelaAfetada;
@@ -14,10 +14,11 @@ public class Auditoria {
 	public Auditoria() {
 	}
 
-	public Auditoria(Long id, Solicitacao solicitacao, Timestamp dataAcao, String tipoAcao, String tabelaAfetada,
+	public Auditoria(Long id, Integer id_solicitacao, Timestamp dataAcao, String tipoAcao, String tabelaAfetada,
 			int idRegistroAfetado, String detalhesAcao) {
+		super();
 		this.id = id;
-		this.solicitacao = solicitacao;
+		this.id_solicitacao = id_solicitacao;
 		this.dataAcao = dataAcao;
 		this.tipoAcao = tipoAcao;
 		this.tabelaAfetada = tabelaAfetada;
@@ -33,12 +34,12 @@ public class Auditoria {
 		this.id = id;
 	}
 
-	public Solicitacao getSolicitacao() {
-		return solicitacao;
+	public Integer getId_solicitacao() {
+		return id_solicitacao;
 	}
 
-	public void setSolicitacao(Solicitacao solicitacao) {
-		this.solicitacao = solicitacao;
+	public void setId_solicitacao(Integer id_solicitacao) {
+		this.id_solicitacao = id_solicitacao;
 	}
 
 	public Timestamp getDataAcao() {
@@ -80,4 +81,5 @@ public class Auditoria {
 	public void setDetalhesAcao(String detalhesAcao) {
 		this.detalhesAcao = detalhesAcao;
 	}
+
 }
