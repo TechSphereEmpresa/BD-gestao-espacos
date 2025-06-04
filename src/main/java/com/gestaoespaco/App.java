@@ -31,18 +31,90 @@ public class App {
 	}
 
 	public void menu() {
-		System.out.println("1) Cadastrar Espaço");
-		System.out.println("2) Listar todos os espaços");
-		System.out.println("2) Listar todos os espaços");
+//		System.out.println("1) Cadastrar solicitacao");
+//		System.out.println("2) Listar todas as solicitacoes");
+
+		System.out.println("3) Cadastrar solicitante");
+		System.out.println("4) Listar todos os solicitante");
+
+		System.out.println("5) Cadastrar espaço");
+		System.out.println("6) Listar todos os espaços");
+
+		System.out.println("7) Cadastrar equipamento");
+		System.out.println("8) Listar todos os equipamento");
+
+//		System.out.println("9) Cadastrar espaco_equipamento");
+//		System.out.println("10) Listar todos os espaco_equipamento");
+
+		System.out.println("11) Cadastrar gestor");
+		System.out.println("12) Listar todos os gestores");
+
+//		System.out.println("13) Cadastrar avaliacao_gestor");
+//		System.out.println("14) Listar todos os avaliacao_gestor");
+
+//		System.out.println("15) Cadastrar auditoria");
+//		System.out.println("16) Listar todas as auditorias");
+
+		System.out.println("17) Cadastrar historico_reserva");
+		System.out.println("18) Listar todos os historico_reserva");
 
 		System.out.print("Opção: ");
 		int op = getScanner().nextInt();
 
 		switch (op) {
 		case 1:
-			addEspaco();
+			// addSolicitacao()
+			break;
 		case 2:
+			// getAllSolicitacoes();
+		case 3:
+			addSolicitante();
+			break;
+		case 4:
+			getAllSolicitantes();
+			break;
+		case 5:
+			addEspaco();
+			break;
+		case 6:
 			getAllEspacos();
+			break;
+		case 7:
+			addEquipamento();
+			break;
+		case 8:
+			getAllEquipamentos();
+			break;
+		case 9:
+			salvarEspacoEquipamento();
+			break;
+		case 10:
+			// getAllEspaco_equipamento();
+			break;
+		case 11:
+			addGestor();
+			break;
+		case 12:
+			getAllGestores();
+			break;
+		case 13:
+			// addAvaliacao_gestor();
+			break;
+		case 14:
+			// getAllAvaliacao_gestor();
+			break;
+		case 15:
+			// addAuditoria();
+			break;
+		case 16:
+			// getAllAuditoria();
+			break;
+		case 17:
+			addHistorico_reserva();
+			break;
+		case 18:
+			getAllHistorico_reserva();
+			break;
 		default:
 			System.out.println("Digite uma opção valida!");
 			menu();
@@ -306,36 +378,37 @@ public class App {
 //	}
 
 	// METODOS SOLICITANTE
-	
+
 	private void addSolicitante() {
-	       System.out.print("Nome do solicitante: ");
-	       String nome = getScanner().nextLine();
-	     
-	       System.out.print("Email: ");
-	       String email = getScanner().next();
-	     
-	       System.out.print("Perfil: ");
-	       String perfil = getScanner().nextLine();
-	     
-	       //Instanciando solicitante
-	       Solicitante sol = new Solicitante(nome, email, perfil);
-	      
-	       //Instanciando a classe DAO do solicitante, chamando o metodo e passando como parametro o solicitante
-	       SolicitanteDAO solDAO = new SolicitanteDAO();
-	       solDAO.addSolicitante(sol);
-	   }
-		
+		System.out.print("Nome do solicitante: ");
+		String nome = getScanner().nextLine();
+
+		System.out.print("Email: ");
+		String email = getScanner().next();
+
+		System.out.print("Perfil: ");
+		String perfil = getScanner().nextLine();
+
+		// Instanciando solicitante
+		Solicitante sol = new Solicitante(nome, email, perfil);
+
+		// Instanciando a classe DAO do solicitante, chamando o metodo e passando como
+		// parametro o solicitante
+		SolicitanteDAO solDAO = new SolicitanteDAO();
+		solDAO.addSolicitante(sol);
+	}
+
 	public void getAllSolicitantes() {
-	       //Instanciando a classe DAO
-			SolicitanteDAO solDAO = new SolicitanteDAO();
-	       System.out.println("\t\n--- Todos os solicitantes ---\n");
-	       //Passando um for no arraylist
-	       for (Solicitante e : solDAO.getAllSolicitantes()) {
-	           System.out.println("Id: " + e.getId());
-	           System.out.println("Nome: " + e.getNome());
-	           System.out.println("Email: " + e.getEmail());
-	           System.out.println("Perfil: " + e.getPerfil() + "\n");
-	       }
-	   }
+		// Instanciando a classe DAO
+		SolicitanteDAO solDAO = new SolicitanteDAO();
+		System.out.println("\t\n--- Todos os solicitantes ---\n");
+		// Passando um for no arraylist
+		for (Solicitante e : solDAO.getAllSolicitantes()) {
+			System.out.println("Id: " + e.getId());
+			System.out.println("Nome: " + e.getNome());
+			System.out.println("Email: " + e.getEmail());
+			System.out.println("Perfil: " + e.getPerfil() + "\n");
+		}
+	}
 
 }

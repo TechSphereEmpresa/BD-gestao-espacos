@@ -26,10 +26,9 @@ public class SolicitanteDAO {
 		try {
 			// o preparedStatement é para preparar a query, substituindo os valores dos ?
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setLong(1, sol.getId());
-			stmt.setString(2, sol.getNome());
-			stmt.setString(3, sol.getEmail());
-			stmt.setString(4, sol.getPerfil());
+			stmt.setString(1, sol.getNome());
+			stmt.setString(2, sol.getEmail());
+			stmt.setString(3, sol.getPerfil());
 
 			// executar query
 			stmt.execute();
@@ -54,6 +53,7 @@ public class SolicitanteDAO {
 
 			while (rs.next()) {
 				Solicitante sol = new Solicitante();
+				sol.setId(rs.getLong("id"));
 				sol.setNome(rs.getString("nome"));
 				sol.setEmail(rs.getString("email"));
 				sol.setPerfil(rs.getString("perfil"));

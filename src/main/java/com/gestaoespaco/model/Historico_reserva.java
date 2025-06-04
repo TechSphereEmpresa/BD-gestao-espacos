@@ -3,8 +3,8 @@ package com.gestaoespaco.model;
 public class Historico_reserva {
 
 	private Long id;
-	private String acao;
 	private Integer id_solicitacao;
+	private String acao;
 
 	public Historico_reserva() {
 	}
