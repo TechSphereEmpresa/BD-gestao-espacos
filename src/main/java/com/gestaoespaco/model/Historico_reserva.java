@@ -3,12 +3,12 @@ package com.gestaoespaco.model;
 public class Historico_reserva {
 	
 	private Long id;
-	private char acao;
+	private String acao;
 	
 	private Solicitante solicitante;
 	public Historico_reserva() {
 	}
-	public Historico_reserva(Long id, char acao, Solicitante solicitante) {
+	public Historico_reserva(Long id, String acao, Solicitante solicitante) {
 		this.id = id;
 		this.acao = acao;
 		this.solicitante = solicitante;
@@ -16,13 +16,13 @@ public class Historico_reserva {
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public char getAcao() {
+	public String getAcao() {
 		return acao;
 	}
-	public void setAcao(char acao) {
+	public void setAcao(String acao) {
 		this.acao = acao;
 	}
 	public Solicitante getSolicitante() {
