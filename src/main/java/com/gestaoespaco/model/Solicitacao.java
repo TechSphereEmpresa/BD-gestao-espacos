@@ -10,12 +10,13 @@ public class Solicitacao {
 	private LocalDateTime inicio;
 	private LocalDateTime fim;
 	private String motivo;
+	private boolean status;
 
 	public Solicitacao() {
 	}
 
 	public Solicitacao(Long id, Espaco espaco, Solicitante solicitante, LocalDateTime dataSolicitacao,
-			LocalDateTime inicio, LocalDateTime fim, String motivo) {
+			LocalDateTime inicio, LocalDateTime fim, String motivo, boolean status) {
 		this.id = id;
 		this.espaco = espaco;
 		this.solicitante = solicitante;
@@ -23,6 +24,7 @@ public class Solicitacao {
 		this.inicio = inicio;
 		this.fim = fim;
 		this.motivo = motivo;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -80,4 +82,13 @@ public class Solicitacao {
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 }
