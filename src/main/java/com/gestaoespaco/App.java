@@ -1,8 +1,9 @@
 package com.gestaoespaco;
 
-import java.security.Timestamp;
+import java.sql.Timestamp; 
 import java.util.Scanner;
 
+import com.gestaoespaco.dao.AuditoriaDAO;
 import com.gestaoespaco.dao.EquipamentoDAO;
 import com.gestaoespaco.dao.EspacoDAO;
 import com.gestaoespaco.dao.Espaco_equipamentoDAO;
@@ -10,6 +11,7 @@ import com.gestaoespaco.dao.GestorDAO;
 import com.gestaoespaco.dao.Historico_reservaDAO;
 import com.gestaoespaco.dao.SolicitacaoDAO;
 import com.gestaoespaco.dao.SolicitanteDAO;
+import com.gestaoespaco.model.Auditoria;
 import com.gestaoespaco.model.Equipamento;
 import com.gestaoespaco.model.Espaco;
 import com.gestaoespaco.model.Espaco_equipamento;
@@ -31,7 +33,7 @@ public class App {
 	}
 
 	public void menu() {
-//		System.out.println("1) Cadastrar solicitacao");
+		System.out.println("1) Cadastrar solicitacao");
 //		System.out.println("2) Listar todas as solicitacoes");
 
 		System.out.println("3) Cadastrar solicitante");
@@ -52,8 +54,8 @@ public class App {
 //		System.out.println("13) Cadastrar avaliacao_gestor");
 //		System.out.println("14) Listar todos os avaliacao_gestor");
 
-//		System.out.println("15) Cadastrar auditoria");
-//		System.out.println("16) Listar todas as auditorias");
+		System.out.println("15) Cadastrar auditoria");
+		System.out.println("16) Listar todas as auditorias");
 
 		System.out.println("17) Cadastrar historico_reserva");
 		System.out.println("18) Listar todos os historico_reserva");
@@ -63,7 +65,7 @@ public class App {
 
 		switch (op) {
 		case 1:
-			// addSolicitacao()
+			addSolicitacao();
 			break;
 		case 2:
 			// getAllSolicitacoes();
@@ -104,10 +106,10 @@ public class App {
 			// getAllAvaliacao_gestor();
 			break;
 		case 15:
-			// addAuditoria();
+			addAuditoria();
 			break;
 		case 16:
-			// getAllAuditoria();
+			getAllAuditorias();
 			break;
 		case 17:
 			addHistorico_reserva();
@@ -123,46 +125,45 @@ public class App {
 
 	// METODOS AUDITORIA
 
-//	private void addAuditoria() {
-//		System.out.print("ID da Solicitação: ");
-//		int id_solicitacao = getScanner().nextInt();
-//		
-//		getScanner().nextLine(); // Pra limpar o buffer
-//		System.out.print("Data e hora (formato 'yyyy-MM-dd HH:mm:ss') da ação: ");
-//		String data = getScanner().nextLine();
-//		Instant instant = Instant.parse(data + "Z");
-//        long dataAcao = instant.toEpochMilli();
-//		
-//		System.out.print("Tipo da ação: ");
-//		String tipoAcao = getScanner().nextLine();
-//		
-//		System.out.print("Tabela afetada: ");
-//		String tabelaAfetada = getScanner().nextLine();
-//		
-//		System.out.print("ID do registro afetado: ");
-//		int idRegistroAfetado = getScanner().nextInt();
-//		
-//		System.out.print("Detalhes da ação: ");
-//		String detalhes = getScanner().nextLine();
-//		
-//		Auditoria auditoria = new Auditoria(id_solicitacao, dataAcao, tipoAcao, tabelaAfetada, idRegistroAfetado, detalhesAcao);
-//		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
-//		auditoriaDAO.inserirAuditoria(auditoria);
-//	}
-//
-//	public void getAllAuditorias() {
-//		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
-//		System.out.println("\t\n--- Todas as Auditorias ---\n");
-//		for (Auditoria a : auditoriaDAO.listarAuditorias()) {
-//			System.out.println("ID: " + a.getId());
-//			System.out.println("ID Solicitação: " + a.getSolicitacao().getId());
-//			System.out.println("Data da Ação: " + a.getDataAcao());
-//			System.out.println("Tipo de Ação: " + a.getTipoAcao());
-//			System.out.println("Tabela Afetada: " + a.getTabelaAfetada());
-//			System.out.println("ID Registro Afetado: " + a.getIdRegistroAfetado());
-//			System.out.println("Detalhes da Ação: " + a.getDetalhesAcao() + "\n");
-//		}
-//	}
+	private void addAuditoria() {
+		System.out.print("ID da Solicitação: ");
+		int id_solicitacao = getScanner().nextInt();
+		
+		getScanner().nextLine(); // Pra limpar o buffer
+		System.out.print("Data e hora (formato 'yyyy-MM-dd HH:mm:ss') da ação: ");
+	    String data = getScanner().nextLine();
+	    Timestamp dataAcao = Timestamp.valueOf(data);
+	    
+		System.out.print("Tipo da ação: ");
+		String tipoAcao = getScanner().nextLine();
+		
+		System.out.print("Tabela afetada: ");
+		String tabelaAfetada = getScanner().nextLine();
+		
+		System.out.print("ID do registro afetado: ");
+		int idRegistroAfetado = getScanner().nextInt();
+		
+		System.out.print("Detalhes da ação: ");
+		String detalhesAcao = getScanner().nextLine();
+		
+		Auditoria auditoria = new Auditoria(id_solicitacao, dataAcao, tipoAcao, tabelaAfetada, idRegistroAfetado, detalhesAcao);
+		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
+		auditoriaDAO.inserirAuditoria(auditoria);
+	}
+
+	public void getAllAuditorias() {
+		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
+		System.out.println("\t\n--- Todas as Auditorias ---\n");
+		for (Auditoria a : auditoriaDAO.listarAuditorias()) {
+			System.out.println("ID: " + a.getId());
+			System.out.println("ID Solicitação: " + a.getId_solicitacao());
+			System.out.println("Data da Ação: " + a.getDataAcao());
+			System.out.println("Tipo de Ação: " + a.getTipoAcao());
+			System.out.println("Tabela Afetada: " + a.getTabelaAfetada());
+			System.out.println("ID Registro Afetado: " + a.getIdRegistroAfetado());
+			System.out.println("Detalhes da Ação: " + a.getDetalhesAcao() + "\n");
+		}
+	}
 
 	// METODOS AVALIACAO_GESTOR
 
@@ -301,7 +302,7 @@ public class App {
 		System.out.print("ID da solicitação: ");
 		int id_solicitacao = getScanner().nextInt();
 
-		System.out.print("ID da solicitação: ");
+		System.out.print("Ação: ");
 		String acao = getScanner().next();
 
 		// Instanciando Historico_reservaa
@@ -326,56 +327,44 @@ public class App {
 
 	// METODOS SOLICITACAO
 
-//	private void addSolicitacao() {
-//		try {
-//			System.out.print("Data da solicitação (yyyy-MM-dd): ");
-//			String dataSolicStr = getScanner().nextLine();
-//			java.sql.Date dataSolicitacao = java.sql.Date.valueOf(dataSolicStr);
-//
-//			System.out.print("Data de início (yyyy-MM-dd): ");
-//			String dataInicioStr = getScanner().nextLine();
-//			java.sql.Date dataInicio = java.sql.Date.valueOf(dataInicioStr);
-//
-//			System.out.print("Data de fim (yyyy-MM-dd): ");
-//			String dataFimStr = getScanner().nextLine();
-//			java.sql.Date dataFim = java.sql.Date.valueOf(dataFimStr);
-//
-//			System.out.print("Horário de início (HH:mm:ss): ");
-//			String horarioInicioStr = getScanner().nextLine();
-//			Timestamp horarioInicio = Timestamp.valueOf(dataInicioStr + " " + horarioInicioStr + ".000");
-//
-//			System.out.print("Horário de fim (HH:mm:ss): ");
-//			String horarioFimStr = getScanner().nextLine();
-//			Timestamp horarioFim = Timestamp.valueOf(dataFimStr + " " + horarioFimStr + ".000");
-//
-//			System.out.print("Motivo da solicitação: ");
-//			String motivo = getScanner().nextLine();
-//
-//			System.out.print("Status (true para ativo / false para inativo): ");
-//			boolean status = getScanner().nextBoolean();
-//			getScanner().nextLine();
-//
-//			// Criar objeto e persistir
-//			Solicitacao solicitacao = new Solicitacao();
-//			solicitacao.setData_solicitacao(dataSolicitacao);
-//			solicitacao.setData_inicio(dataInicio);
-//			solicitacao.setData_fim(dataFim);
-//			solicitacao.setHorario_inicio(horarioInicio);
-//			solicitacao.setHorario_fim(horarioFim);
-//			solicitacao.setMotivo(motivo);
-//			solicitacao.setStatus(status);
-//
-//			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
-//			solicitacaoDAO.addSolicitacao(solicitacao);
-//
-//			System.out.println("Solicitação adicionada com sucesso!");
-//
-//		} catch (IllegalArgumentException e) {
-//			System.out.println("Formato de data ou hora inválido. Use os padrões indicados.");
-//		} catch (Exception e) {
-//			System.out.println("Erro ao adicionar solicitação: " + e.getMessage());
-//		}
-//	}
+	private void addSolicitacao() {
+		try {
+			System.out.print("ID do espaço: ");
+			int id_espaco = getScanner().nextInt();
+			
+			System.out.print("ID do solicitante: ");
+			int id_solicitante = getScanner().nextInt();
+			
+			Timestamp dataSolicitacao = new Timestamp(System.currentTimeMillis());
+
+			System.out.print("Data de início (formato 'yyyy-MM-dd HH:mm:ss'): ");
+		    String dataInicioStr = getScanner().nextLine();
+		    Timestamp inicio = Timestamp.valueOf(dataInicioStr);
+		    
+		    System.out.print("Data de fim (formato 'yyyy-MM-dd HH:mm:ss'): ");
+		    String dataFimStr = getScanner().nextLine();
+		    Timestamp fim = Timestamp.valueOf(dataFimStr);
+		    
+			System.out.print("Motivo da solicitação: ");
+			String motivo = getScanner().nextLine();
+
+			System.out.print("Status (true para ativo / false para inativo): ");
+			boolean status = getScanner().nextBoolean();
+
+			// Criar objeto e persistir
+			Solicitacao solicitacao = new Solicitacao(id_espaco, id_solicitante, dataSolicitacao, inicio, fim, motivo, status);
+
+			SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
+			solicitacaoDAO.addSolicitacao(solicitacao);
+
+			System.out.println("Solicitação adicionada com sucesso!");
+
+		} catch (IllegalArgumentException e) {
+			System.out.println("Formato de data ou hora inválido. Use os padrões indicados.");
+		} catch (Exception e) {
+			System.out.println("Erro ao adicionar solicitação: " + e.getMessage());
+		}
+	}
 
 	// METODOS SOLICITANTE
 

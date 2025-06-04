@@ -18,7 +18,7 @@ public class SolicitacaoDAO {
 
 	public void addSolicitacao(Solicitacao sao) {
 
-		String sql = "INSERT INTO solicitacao (data_solicitacao, data_inicio, data_fim, horario_inicio, horario_fim, motivo, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO solicitacao (id_espaco, id_solicitante, data_solicitacao, inicio, fim, motivo, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		// query para adicionar o espaço
 		conexao = BancoConexaoDAO.getConexao();
@@ -26,16 +26,17 @@ public class SolicitacaoDAO {
 		try {
 			// o preparedStatement é para preparar a query, substituindo os valores dos ?
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			// stmt.setLong(1, sao.getId());
-			stmt.setTimestamp(1, sao.getDataSolicitacao());
-			stmt.setTimestamp(2, sao.getInicio());
-			stmt.setTimestamp(3, sao.getFim());
-			stmt.setString(4, sao.getMotivo());
-			stmt.setBoolean(5, sao.getStatus());
+			stmt.setInt(1, sao.getId_espaco());
+			stmt.setInt(2, sao.getId_solicitante());
+			stmt.setTimestamp(3, sao.getDataSolicitacao());
+			stmt.setTimestamp(4, sao.getInicio());
+			stmt.setTimestamp(5, sao.getFim());
+			stmt.setString(6, sao.getMotivo());
+			stmt.setBoolean(7, sao.getStatus());
 
 			// executar query
 			stmt.execute();
-			System.out.println("Solicitação adicionado no banco");
+			System.out.println("Solicitação adicionada no banco");
 
 		} catch (SQLException e) {
 			System.out.println("Erro em adicionar solicitação: " + e);
@@ -57,6 +58,8 @@ public class SolicitacaoDAO {
 
 			while (rs.next()) {
 				Solicitacao sao = new Solicitacao();
+				sao.setId_espaco(rs.getInt("id_espaco"));
+				sao.setId_solicitante(rs.getInt("id_solicitante"));
 				sao.setDataSolicitacao(rs.getTimestamp("data_solicitacao"));
 				sao.setInicio(rs.getTimestamp("inicio"));
 				sao.setFim(rs.getTimestamp("fim"));

@@ -26,9 +26,8 @@ private Connection conexao = null;
 		try {
 			// o preparedStatement é para preparar a query, substituindo os valores dos ?
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setLong(1, gst.getId());
-			stmt.setString(2, gst.getNome());
-			stmt.setString(3, gst.getEmail());
+			stmt.setString(1, gst.getNome());
+			stmt.setString(2, gst.getEmail());
 			
 			// executar query
 			stmt.execute();
@@ -53,6 +52,7 @@ private Connection conexao = null;
 			
 			while (rs.next()) {
 				Gestor gst = new Gestor();
+				gst.setId(rs.getLong("id"));
 				gst.setNome(rs.getString("nome"));
 				gst.setEmail(rs.getString("email"));
 				

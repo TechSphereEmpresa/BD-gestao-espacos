@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 public class Solicitacao {
 	private Long id;
-	private Espaco espaco;
-	private Solicitante solicitante;
+	private Integer id_espaco;
+	private Integer id_solicitante;
 	private Timestamp dataSolicitacao;
 	private Timestamp inicio;
 	private Timestamp fim;
@@ -15,11 +15,22 @@ public class Solicitacao {
 	public Solicitacao() {
 	}
 
-	public Solicitacao(Long id, Espaco espaco, Solicitante solicitante, Timestamp dataSolicitacao,
-			Timestamp inicio, Timestamp fim, String motivo, boolean status) {
+	public Solicitacao(Integer id_espaco, Integer id_solicitante, Timestamp dataSolicitacao, Timestamp inicio,
+			Timestamp fim, String motivo, boolean status) {
+		this.id_espaco = id_espaco;
+		this.id_solicitante = id_solicitante;
+		this.dataSolicitacao = dataSolicitacao;
+		this.inicio = inicio;
+		this.fim = fim;
+		this.motivo = motivo;
+		this.status = status;
+	}
+
+	public Solicitacao(Long id, Integer id_espaco, Integer id_solicitante, Timestamp dataSolicitacao, Timestamp inicio,
+			Timestamp fim, String motivo, boolean status) {
 		this.id = id;
-		this.espaco = espaco;
-		this.solicitante = solicitante;
+		this.id_espaco = id_espaco;
+		this.id_solicitante = id_solicitante;
 		this.dataSolicitacao = dataSolicitacao;
 		this.inicio = inicio;
 		this.fim = fim;
@@ -35,20 +46,20 @@ public class Solicitacao {
 		this.id = id;
 	}
 
-	public Espaco getEspaco() {
-		return espaco;
+	public Integer getId_espaco() {
+		return id_espaco;
 	}
 
-	public void setEspaco(Espaco espaco) {
-		this.espaco = espaco;
+	public void setId_espaco(Integer id_espaco) {
+		this.id_espaco = id_espaco;
 	}
 
-	public Solicitante getSolicitante() {
-		return solicitante;
+	public Integer getId_solicitante() {
+		return id_solicitante;
 	}
 
-	public void setSolicitante(Solicitante solicitante) {
-		this.solicitante = solicitante;
+	public void setId_solicitante(Integer id_solicitante) {
+		this.id_solicitante = id_solicitante;
 	}
 
 	public Timestamp getDataSolicitacao() {
@@ -90,5 +101,4 @@ public class Solicitacao {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-
 }

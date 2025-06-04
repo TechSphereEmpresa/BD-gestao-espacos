@@ -14,6 +14,16 @@ public class Auditoria {
 	public Auditoria() {
 	}
 
+	public Auditoria(Integer id_solicitacao, Timestamp dataAcao, String tipoAcao, String tabelaAfetada,
+			int idRegistroAfetado, String detalhesAcao) {
+		this.id_solicitacao = id_solicitacao;
+		this.dataAcao = dataAcao;
+		this.tipoAcao = tipoAcao;
+		this.tabelaAfetada = tabelaAfetada;
+		this.idRegistroAfetado = idRegistroAfetado;
+		this.detalhesAcao = detalhesAcao;
+	}
+	
 	public Auditoria(Long id, Integer id_solicitacao, Timestamp dataAcao, String tipoAcao, String tabelaAfetada,
 			int idRegistroAfetado, String detalhesAcao) {
 		super();
