@@ -79,7 +79,7 @@ public class App {
 			System.out.println("Nome: " + e.getNome());
 			System.out.println("Tipo: " + e.getTipo());
 			System.out.println("Localização: " + e.getLocalizacao());
-			System.out.println("Metragem: " + e.getMetragrem());
+			System.out.println("Metragem: " + e.getMetragem());
 			System.out.println("Capacidade: " + e.getCapacidade() + "\n");
 		}
 	}

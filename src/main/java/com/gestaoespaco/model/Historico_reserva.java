@@ -4,16 +4,20 @@ public class Historico_reserva {
 
 	private Long id;
 	private String acao;
-
-	private Solicitante solicitante;
+	private Integer id_solicitacao;
 
 	public Historico_reserva() {
 	}
 
-	public Historico_reserva(Long id, String acao, Solicitante solicitante) {
-		this.id = id;
+	public Historico_reserva(Integer id_solicitacao , String acao) {
+		this.id_solicitacao = id_solicitacao;
 		this.acao = acao;
-		this.solicitante = solicitante;
+	}
+	
+	public Historico_reserva(Long id, Integer id_solicitacao , String acao) {
+		this.id = id;
+		this.id_solicitacao = id_solicitacao;
+		this.acao = acao;
 	}
 
 	public Long getId() {
@@ -32,12 +36,12 @@ public class Historico_reserva {
 		this.acao = acao;
 	}
 
-	public Solicitante getSolicitante() {
-		return solicitante;
+	public Integer getId_solicitacao() {
+		return id_solicitacao;
 	}
 
-	public void setSolicitante(Solicitante solicitante) {
-		this.solicitante = solicitante;
+	public void setId_solicitacao(Integer id_solicitacao) {
+		this.id_solicitacao = id_solicitacao;
 	}
 
 }

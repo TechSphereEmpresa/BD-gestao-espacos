@@ -29,7 +29,7 @@ public class EspacoDAO {
 			stmt.setString(1, esp.getNome());
 			stmt.setString(2, esp.getTipo());
 			stmt.setString(3, esp.getLocalizacao());
-			stmt.setDouble(4, esp.getMetragrem());
+			stmt.setDouble(4, esp.getMetragem());
 			stmt.setInt(5, esp.getCapacidade());
 
 			// executar query
@@ -59,7 +59,7 @@ public class EspacoDAO {
 				esp.setNome(rs.getString("nome"));
 				esp.setTipo(rs.getString("tipo"));
 				esp.setLocalizacao(rs.getString("localizacao"));
-				esp.setMetragrem(rs.getDouble("metragem"));
+				esp.setMetragem(rs.getDouble("metragem"));
 				esp.setCapacidade(rs.getInt("capacidade"));
 
 				listEspaco.add(esp);

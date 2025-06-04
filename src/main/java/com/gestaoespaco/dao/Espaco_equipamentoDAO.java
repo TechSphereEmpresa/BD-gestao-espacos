@@ -6,26 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//colocar o import 
-import com.gestaoespaco.model.Historico_reserva;
+import com.gestaoespaco.model.Espaco_equipamento;
 
-public class Historico_reservaDAO {
+public class Espaco_equipamentoDAO {
 	private Connection conexao = null;
 
-	public Historico_reservaDAO() {
+	public Espaco_equipamentoDAO() {
 		conexao = BancoConexaoDAO.getConexao();
 	}
 
-	public void addHisRes(Historico_reserva historico) {
-		String sql = "INSERT INTO historico_reserva (id_solicitacao, acao) VALUES (?, ?)";
+	public void addEspEq(Espaco_equipamento espEq) {
+		String sql = "INSERT INTO espaco_equipamento (id_espaco, id_equipamento, quantidade) VALUES (?, ?, ?)";
 		// query para adicionar o espaço
 		conexao = BancoConexaoDAO.getConexao();
 
 		try {
 			// o preparedStatement é para preparar a query, substituindo os valores dos ?
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, historico.getId_solicitacao());
-			stmt.setString(2, historico.getAcao());
+			stmt.setInt(1, espEq.getId_espaco());
+			stmt.setInt(2, espEq.getId_equipamento());
+			stmt.setInt(2, espEq.getQuantidade());
 			stmt.executeUpdate();
 			stmt.close();
 			System.out.println("Histórico de reserva adicionado com sucesso:");
@@ -36,8 +36,8 @@ public class Historico_reservaDAO {
 		}
 	}
 
-	public ArrayList<Historico_reserva> getAllHisRes() {
-		ArrayList<Historico_reserva> lisHisRes = new ArrayList<>();
+	public ArrayList<Espaco_equipamento> getAllEspEq() {
+		ArrayList<Espaco_equipamento> lisEspEq = new ArrayList<>();
 
 		String sql = "SELECT * FROM historico_reserva";
 		try {
@@ -45,15 +45,16 @@ public class Historico_reservaDAO {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Historico_reserva hr = new Historico_reserva();
+				Espaco_equipamento hr = new Espaco_equipamento();
 				hr.setId(rs.getLong("id"));
-				hr.setId_solicitacao(rs.getInt("id_solicitacao"));
-				hr.setAcao(rs.getString("acao"));
+				hr.setId_espaco(rs.getInt("id_espaco"));
+				hr.setId_equipamento(rs.getInt("id_equipamento"));
+				hr.setQuantidade(rs.getInt("quantidade"));
 
-				lisHisRes.add(hr);
+				lisEspEq.add(hr);
 			}
 			rs.close();
-			return lisHisRes;
+			return lisEspEq;
 
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());

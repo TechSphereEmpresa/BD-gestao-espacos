@@ -3,17 +3,17 @@ package com.gestaoespaco.model;
 public class Espaco_equipamento {
 
 	private Long id;
-	private Espaco espaco;
-	private Equipamento equipamento;
-	private int quantidade;
+	private Integer id_espaco;
+	private Integer id_equipamento;
+	private Integer quantidade;
 
 	public Espaco_equipamento() {
 	}
 
-	public Espaco_equipamento(Long id, Espaco espaco, Equipamento equipamento, int quantidade) {
+	public Espaco_equipamento(Long id, Integer id_espaco, Integer id_equipamento, Integer quantidade) {
 		this.id = id;
-		this.espaco = espaco;
-		this.equipamento = equipamento;
+		this.id_espaco = id_espaco;
+		this.id_equipamento = id_equipamento;
 		this.quantidade = quantidade;
 	}
 
@@ -25,27 +25,28 @@ public class Espaco_equipamento {
 		this.id = id;
 	}
 
-	public Espaco getEspaco() {
-		return espaco;
+	public Integer getId_espaco() {
+		return id_espaco;
 	}
 
-	public void setEspaco(Espaco espaco) {
-		this.espaco = espaco;
+	public void setId_espaco(Integer id_espaco) {
+		this.id_espaco = id_espaco;
 	}
 
-	public Equipamento getEquipamento() {
-		return equipamento;
+	public Integer getId_equipamento() {
+		return id_equipamento;
 	}
 
-	public void setEquipamento(Equipamento equipamento) {
-		this.equipamento = equipamento;
+	public void setId_equipamento(Integer id_equipamento) {
+		this.id_equipamento = id_equipamento;
 	}
 
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
 }
