@@ -32,7 +32,7 @@ Interface de interação com o banco de dados utilizando Java (JDBC) e páginas 
 - **PostgreSQL** (banco de dados)
 
 ## 🧱 Modelo Físico
-
+<img src="https://github.com/user-attachments/assets/fa67d703-6cd4-4a4d-9a13-32502005c8bb">
 
 
 
