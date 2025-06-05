@@ -58,6 +58,7 @@ public class SolicitacaoDAO {
 
 			while (rs.next()) {
 				Solicitacao sao = new Solicitacao();
+				sao.setId(rs.getLong("id"));
 				sao.setId_espaco(rs.getInt("id_espaco"));
 				sao.setId_solicitante(rs.getInt("id_solicitante"));
 				sao.setDataSolicitacao(rs.getTimestamp("data_solicitacao"));

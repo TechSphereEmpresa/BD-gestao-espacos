@@ -1,9 +1,11 @@
 package com.gestaoespaco;
 
-import java.sql.Timestamp; 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Scanner;
 
 import com.gestaoespaco.dao.AuditoriaDAO;
+import com.gestaoespaco.dao.Avaliacao_gestorDAO;
 import com.gestaoespaco.dao.EquipamentoDAO;
 import com.gestaoespaco.dao.EspacoDAO;
 import com.gestaoespaco.dao.Espaco_equipamentoDAO;
@@ -12,6 +14,7 @@ import com.gestaoespaco.dao.Historico_reservaDAO;
 import com.gestaoespaco.dao.SolicitacaoDAO;
 import com.gestaoespaco.dao.SolicitanteDAO;
 import com.gestaoespaco.model.Auditoria;
+import com.gestaoespaco.model.Avaliacao_gestor;
 import com.gestaoespaco.model.Equipamento;
 import com.gestaoespaco.model.Espaco;
 import com.gestaoespaco.model.Espaco_equipamento;
@@ -34,7 +37,7 @@ public class App {
 
 	public void menu() {
 		System.out.println("1) Cadastrar solicitacao");
-//		System.out.println("2) Listar todas as solicitacoes");
+		System.out.println("2) Listar todas as solicitacoes");
 
 		System.out.println("3) Cadastrar solicitante");
 		System.out.println("4) Listar todos os solicitante");
@@ -45,14 +48,14 @@ public class App {
 		System.out.println("7) Cadastrar equipamento");
 		System.out.println("8) Listar todos os equipamento");
 
-//		System.out.println("9) Cadastrar espaco_equipamento");
-//		System.out.println("10) Listar todos os espaco_equipamento");
+		System.out.println("9) Cadastrar espaco_equipamento");
+		System.out.println("10) Listar todos os espaco_equipamento");
 
 		System.out.println("11) Cadastrar gestor");
 		System.out.println("12) Listar todos os gestores");
 
-//		System.out.println("13) Cadastrar avaliacao_gestor");
-//		System.out.println("14) Listar todos os avaliacao_gestor");
+		System.out.println("13) Cadastrar avaliacao_gestor");
+		System.out.println("14) Listar todos os avaliacao_gestor");
 
 		System.out.println("15) Cadastrar auditoria");
 		System.out.println("16) Listar todas as auditorias");
@@ -68,7 +71,8 @@ public class App {
 			addSolicitacao();
 			break;
 		case 2:
-			// getAllSolicitacoes();
+			getAllSolicitacoes();
+			break;
 		case 3:
 			addSolicitante();
 			break;
@@ -91,7 +95,7 @@ public class App {
 			salvarEspacoEquipamento();
 			break;
 		case 10:
-			// getAllEspaco_equipamento();
+			getAllEspaco_Equipamento();
 			break;
 		case 11:
 			addGestor();
@@ -100,10 +104,10 @@ public class App {
 			getAllGestores();
 			break;
 		case 13:
-			// addAvaliacao_gestor();
+			addAvaliacao_Gestor();
 			break;
 		case 14:
-			// getAllAvaliacao_gestor();
+			getAllAvaliacao_Gestor();
 			break;
 		case 15:
 			addAuditoria();
@@ -166,6 +170,41 @@ public class App {
 	}
 
 	// METODOS AVALIACAO_GESTOR
+	private void addAvaliacao_Gestor() {
+	       System.out.print("ID do Gestor: ");
+	       Long idGestor = getScanner().nextLong();
+	       getScanner().nextLine();
+	      
+	       System.out.print("ID da Solicitação: ");
+	       Long idSolicitacao = getScanner().nextLong();
+	       getScanner().nextLine();
+	       System.out.print("Status: ");
+	       boolean status = getScanner().nextBoolean();
+	      
+	      
+	       Gestor gestor = new Gestor();
+	       gestor.setId(idGestor);
+	       Solicitacao solicitacao = new Solicitacao();
+	       solicitacao.setId(idSolicitacao);
+	       Avaliacao_gestor avaliacao = new Avaliacao_gestor();
+	       avaliacao.setGestor(gestor);
+	       avaliacao.setSolicitacao(solicitacao);
+	       avaliacao.setStatus(status);
+	       Avaliacao_gestorDAO agDAO = new Avaliacao_gestorDAO();
+	       agDAO.addAvaliacao(avaliacao);
+	}
+	      
+	public void getAllAvaliacao_Gestor() {
+	       Avaliacao_gestorDAO dao = new Avaliacao_gestorDAO();
+	       System.out.println("\t\n--- Todas as avaliações de gestores ---\n");
+	       for (Avaliacao_gestor a : dao.getAllAvaliacoes()) {
+	       System.out.println("ID: " + a.getId());
+	       System.out.println("ID do Gestor: " + (a.getGestor() != null ? a.getGestor().getId() : "N/A"));
+	       System.out.println("ID da Solicitação: " + (a.getSolicitacao() != null ? a.getSolicitacao().getId() : "N/A"));
+	       System.out.println("Status: " + a.getStatus() + "\n");
+	           }
+	       }
+	
 
 	// METODOS EQUIPAMENTO
 
@@ -217,6 +256,23 @@ public class App {
 		} catch (Exception e) {
 			System.out.println("Erro ao salvar Espaço e Equipamento: " + e.getMessage());
 		}
+	}
+	
+	public void getAllEspaco_Equipamento() {
+	    try {
+	        Espaco_equipamentoDAO dao = new Espaco_equipamentoDAO();
+	        List<Espaco_equipamento> lisEspEq = dao.getAllEspEq();
+
+	        System.out.println("\n--- Lista de Espaço x Equipamento ---\n");
+	        for (Espaco_equipamento ee : lisEspEq) {
+	            System.out.println("Espaço ID: " + ee.getId_espaco());
+	            System.out.println("Equipamento ID: " + ee.getId_equipamento());
+	            System.out.println("Quantidade: " + ee.getQuantidade());
+	            System.out.println("-----------------------------");
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Erro ao buscar dados de espaço e equipamento: " + e.getMessage());
+	    }
 	}
 
 	// METODOS ESPACO
@@ -365,6 +421,22 @@ public class App {
 			System.out.println("Erro ao adicionar solicitação: " + e.getMessage());
 		}
 	}
+	
+	public void getAllSolicitacoes() {
+	       SolicitacaoDAO solicitacaoDAO = new SolicitacaoDAO();
+	       System.out.println("\t\n--- Todas as Solicitações ---\n");
+	       for (Solicitacao s : solicitacaoDAO.getAllSolicitacoes()) {
+	           System.out.println("ID: " + s.getId());
+	           System.out.println("ID Espaço: " + s.getId_espaco());
+	           System.out.println("ID Solicitante: " + s.getId_solicitante());
+	           System.out.println("Data da Solicitação: " + s.getDataSolicitacao());
+	           System.out.println("Data de Início: " + s.getInicio());
+	           System.out.println("Data de Fim: " + s.getFim());
+	           System.out.println("Motivo: " + s.getMotivo());
+	           System.out.println("Status: " + (s.getStatus() ? "Aprovado" : "Pendente/Rejeitado"));
+	           System.out.println("------------------------------\n");
+	       }
+	   }
 
 	// METODOS SOLICITANTE
 
